@@ -50,11 +50,11 @@ jobs:
       - name: Gather files changed
         uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
         with:
-          fileOutput: 'json'
+          fileOutput: 'txt'
 
       # For verification
       - name: Show files changed
-        run: cat $HOME/files.json
+        run: cat $HOME/files.txt
 
       # Example 3
       # - name: Get changed js files excluding the docs folder
@@ -102,7 +102,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: shptxc@gmail.com # <user@example.com>
           # Optional plain body:
-          body: $HOME/files.json
+          body: $HOME/files.txt
           # Optional HTML body read from file:
           #html_body: file://README.html
           # Optional carbon copy recipients:
@@ -119,6 +119,6 @@ jobs:
           #convert_markdown: true
           # Optional attachments:
           #attachments: attachments.zip,git.diff,./dist/static/*.js
-          attachments: $HOME/files.json
+          attachments: $HOME/files.txt
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
