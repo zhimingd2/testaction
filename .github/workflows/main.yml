@@ -98,7 +98,7 @@ jobs:
           # Required mail subject:
           subject: Github Actions job result - test
           # Required recipients' addresses:
-          to: zhiming.dai@ukg.com
+          to: zhiming.dai@gmail.com
           # Required sender full name (address can be skipped):
           from: shptxc@gmail.com # <user@example.com>
           # Optional plain body:
