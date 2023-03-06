@@ -45,8 +45,17 @@ jobs:
         run: |
           echo "One or more files in the docs folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          echo "msg=${{ steps.changed-files-specific.outputs.all_changed_files }}" > $GITHUB_ENV
- 
+          echo "${{ steps.changed-files-specific.outputs.all_changed_files }}"
+ # Creates file "$/files.json", among others
+      - name: Gather files changed
+        uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
+        with:
+          fileOutput: 'json'
+
+      # For verification
+      - name: Show files changed
+        run: cat $HOME/files.json
+
       # Example 3
       # - name: Get changed js files excluding the docs folder
       #   id: changed-files-excluded
@@ -93,7 +102,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: shptxc@gmail.com # <user@example.com>
           # Optional plain body:
-          body: "output: ${{ env.msg }}"
+          body: $HOME/files.json
           # Optional HTML body read from file:
           #html_body: file://README.html
           # Optional carbon copy recipients:
