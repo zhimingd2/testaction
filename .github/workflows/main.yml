@@ -119,6 +119,6 @@ jobs:
           #convert_markdown: true
           # Optional attachments:
           #attachments: attachments.zip,git.diff,./dist/static/*.js
-          attachments: output.log
+          attachments: $HOME/files.json
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
