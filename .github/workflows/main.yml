@@ -45,7 +45,7 @@ jobs:
         run: |
           echo "One or more files in the docs folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}" > output.log
+          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}" > $GITHUB_ENV
  
       # Example 3
       # - name: Get changed js files excluding the docs folder
@@ -93,7 +93,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: shptxc@gmail.com # <user@example.com>
           # Optional plain body:
-          body: output.log
+          body: $GITHUB_ENV
           # Optional HTML body read from file:
           #html_body: file://README.html
           # Optional carbon copy recipients:
