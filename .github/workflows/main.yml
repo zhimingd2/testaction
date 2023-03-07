@@ -56,6 +56,17 @@ jobs:
       - name: Show files changed
         run: cat $HOME/files.txt
 
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install dependencies and send email
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv 
+          pipenv install
+          pipenv run python src/sendemail.py $HOME/files.txt
       # Example 3
       # - name: Get changed js files excluding the docs folder
       #   id: changed-files-excluded
@@ -65,60 +76,60 @@ jobs:
       #       **/*.js
       #     files_ignore: docs/** # Alternatively using: `docs`
 
-      - name: Run step if any other js file(s) change
-        if: steps.changed-files-excluded.outputs.any_changed == 'true'
-        run: |
-          echo "One or more js files not in the doc folder has changed."
-          echo "List all the files that have changed: ${{ steps.changed-files-excluded.outputs.all_changed_files }}"
+      # - name: Run step if any other js file(s) change
+      #   if: steps.changed-files-excluded.outputs.any_changed == 'true'
+      #   run: |
+      #     echo "One or more js files not in the doc folder has changed."
+      #     echo "List all the files that have changed: ${{ steps.changed-files-excluded.outputs.all_changed_files }}"
 
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          # Specify connection via URL (replaces server_address, server_port, secure,
-          # username and password)
-          #
-          # Format:
-          #
-          #  * smtp://user:password@server:port
-          #  * smtp+starttls://user:password@server:port
-          #@ smtp://shptxc:chqdwarvdunuyugp@gmail.com:25
-          #connection_url: ${{secrets.MAIL_CONNECTION}}
-          #connection_url: smtp://shptxc:uwawypwbcuxfcnbp@gmail.com:465
-          # Required mail server address if not connection_url:
-          server_address: smtp.gmail.com
-          # Server port, default 25:
-          server_port: 465
-          # Optional whether this connection use TLS (default is true if server_port is 465)
-          secure: true
-          # Optional (recommended) mail server username:
-          username: shptxc
-          # Optional (recommended) mail server password:
-          #password: ${{secrets.MAIL_PASSWORD}}
-          password: uwawypwbcuxfcnbp
-          # Required mail subject:
-          subject: Github Actions job result - test
-          # Required recipients' addresses:
-          to: zhiming.dai@gmail.com
-          # Required sender full name (address can be skipped):
-          from: shptxc@gmail.com # <user@example.com>
-          # Optional plain body:
-          body: $HOME/files.txt
-          # Optional HTML body read from file:
-          #html_body: file://README.html
-          # Optional carbon copy recipients:
-          #cc: kyloren@example.com,leia@example.com
-          # Optional blind carbon copy recipients:
-          #bcc: r2d2@example.com,hansolo@example.com
-          # Optional recipient of the email response:
-          #reply_to: luke@example.com
-          # Optional Message ID this message is replying to:
-          #in_reply_to: <random-luke@example.com>
-          # Optional unsigned/invalid certificates allowance:
-          ignore_cert: true
-          # Optional converting Markdown to HTML (set content_type to text/html too):
-          #convert_markdown: true
-          # Optional attachments:
-          #attachments: attachments.zip,git.diff,./dist/static/*.js
-          attachments: files.txt
-          # Optional priority: 'high', 'normal' (default) or 'low'
-          priority: low
+      # - name: Send email
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     # Specify connection via URL (replaces server_address, server_port, secure,
+      #     # username and password)
+      #     #
+      #     # Format:
+      #     #
+      #     #  * smtp://user:password@server:port
+      #     #  * smtp+starttls://user:password@server:port
+      #     #@ smtp://shptxc:chqdwarvdunuyugp@gmail.com:25
+      #     #connection_url: ${{secrets.MAIL_CONNECTION}}
+      #     #connection_url: smtp://shptxc:uwawypwbcuxfcnbp@gmail.com:465
+      #     # Required mail server address if not connection_url:
+      #     server_address: smtp.gmail.com
+      #     # Server port, default 25:
+      #     server_port: 465
+      #     # Optional whether this connection use TLS (default is true if server_port is 465)
+      #     secure: true
+      #     # Optional (recommended) mail server username:
+      #     username: shptxc
+      #     # Optional (recommended) mail server password:
+      #     #password: ${{secrets.MAIL_PASSWORD}}
+      #     password: uwawypwbcuxfcnbp
+      #     # Required mail subject:
+      #     subject: Github Actions job result - test
+      #     # Required recipients' addresses:
+      #     to: zhiming.dai@gmail.com
+      #     # Required sender full name (address can be skipped):
+      #     from: shptxc@gmail.com # <user@example.com>
+      #     # Optional plain body:
+      #     body: $HOME/files.txt
+      #     # Optional HTML body read from file:
+      #     #html_body: file://README.html
+      #     # Optional carbon copy recipients:
+      #     #cc: kyloren@example.com,leia@example.com
+      #     # Optional blind carbon copy recipients:
+      #     #bcc: r2d2@example.com,hansolo@example.com
+      #     # Optional recipient of the email response:
+      #     #reply_to: luke@example.com
+      #     # Optional Message ID this message is replying to:
+      #     #in_reply_to: <random-luke@example.com>
+      #     # Optional unsigned/invalid certificates allowance:
+      #     ignore_cert: true
+      #     # Optional converting Markdown to HTML (set content_type to text/html too):
+      #     #convert_markdown: true
+      #     # Optional attachments:
+      #     #attachments: attachments.zip,git.diff,./dist/static/*.js
+      #     attachments: files.txt
+      #     # Optional priority: 'high', 'normal' (default) or 'low'
+      #     priority: low
