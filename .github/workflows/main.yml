@@ -50,11 +50,11 @@ jobs:
       - name: Gather files changed
         uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
         with:
-          fileOutput: 'txt'
+          fileOutput: 'json'
 
       # For verification
       - name: Show files changed
-        run: cat $HOME/files.txt
+        run: cat $HOME/files.json
 
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -66,7 +66,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pipenv 
           pipenv install
-          pipenv run python src/sendemail.py $HOME/files.txt
+          pipenv run python src/sendemail.py $HOME/files.json
       # Example 3
       # - name: Get changed js files excluding the docs folder
       #   id: changed-files-excluded
