@@ -6,7 +6,7 @@ from email.header import Header
 def main( filename ):
     print(filename[0])
     sender_email = "shptxc@gmail.com"
-    receiver_email = "zhiming.dai@ukg.com"
+    receiver_email = "zhiming.dai.bill@gmail.com"
     password = "uwawypwbcuxfcnbp"
 
     msg = MIMEMultipart()
