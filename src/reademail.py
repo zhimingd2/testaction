@@ -32,13 +32,14 @@ con = imaplib.IMAP4_SSL(imap_url)
 
 # logging the user in
 con.login(user, password)
+print(f"login:{user}")
 
 # calling function to check for email under this label
 con.select('Inbox')
 
 # fetching emails from this user "tu**h*****1@gmail.com"
 msgs = get_emails(search('FROM', 'MY_ANOTHER_GMAIL_ADDRESS', con))
-
+print(f"msgs:{msgs}")
 # Uncomment this to see what actually comes as data
 # print(msgs)
 
