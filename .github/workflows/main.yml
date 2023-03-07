@@ -38,7 +38,8 @@ jobs:
         id: changed-files-specific
         uses: tj-actions/changed-files@v35
         with:
-          files: docs/*.{js,html,py}  # Alternatively using: `docs/**` or `docs`
+          # files: docs/*.{js,html,py}  # Alternatively using: `docs/**` or `docs`
+          files: docs/*.*
 
       - name: Run step if any file(s) in the docs folder change
         if: steps.changed-files-specific.outputs.any_changed == 'true'
